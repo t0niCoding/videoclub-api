@@ -1,3 +1,4 @@
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">
@@ -7,9 +8,60 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
-## About Laravel
+## About Videoclub API
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Este proyecto es una API desarrollada con Laravel para un videoclub. Permite gestionar películas, usuarios y alquileres de una manera eficiente y sencilla.
+El objetivo es demostrar habilidades en el desarrollo de APIs RESTful, incluyendo autenticación, validación, control de acceso, y la integración con bases de datos.
+
+## Flujo de trabajo
+
+1. **Rama `main`**: Esta rama contiene la versión estable del proyecto.
+2. **Rama `develop`**: Esta rama es donde se realizan los desarrollos y pruebas antes de ser fusionados con `main`.
+
+## Tecnologías utilizadas
+
+- **Laravel 12.x**: Framework PHP para aplicaciones web.
+- **MySQL**: Base de datos relacional para almacenar la información del videoclub.
+- **Composer**: Gestor de dependencias de PHP.
+
+## Funcionalidades principales
+
+- **Gestión de películas**: Crear, leer, actualizar y eliminar registros de películas.
+- **Gestión de usuarios**: Registro de usuarios y autenticación.
+- **Gestión de alquileres**: Permite a los usuarios alquilar películas y ver su historial.
+
+## Instalación
+
+Para instalar y ejecutar este proyecto, sigue estos pasos:
+
+1. Clona el repositorio:
+
+   ```bash
+   git clone https://github.com/t0niCoding/videoclub-api.git
+   cd videoclub-api
+
+2. Instala las dependencias de Composer:
+
+    composer install
+
+3. Crea el archivo .env:
+
+    cp .env.example .env
+
+4. Genera la clave de la aplicación:
+
+    php artisan key:generate
+
+5. Configura la base de datos en el archivo .env (configura los parámetros DB_HOST, DB_PORT, DB_DATABASE, DB_USERNAME, DB_PASSWORD).
+
+6. Ejecuta las migraciones para crear las tablas necesarias en la base de datos:
+
+    php artisan migrate
+
+7. Corre el servidor
+
+    php artisan serve
+
 
 - [Simple, fast routing engine](https://laravel.com/docs/routing).
 - [Powerful dependency injection container](https://laravel.com/docs/container).
