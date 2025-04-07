@@ -14,7 +14,7 @@ return new class extends Migration
     {
         Schema::create(Movie::TABLE, function (Blueprint $table) {
             $table->id();
-            $table->string(Movie::ORIGINAL_ID)->unique():
+            $table->string(Movie::ORIGINAL_ID)->unique();
             $table->string(Movie::TITLE);
             $table->string(Movie::ORIGINAL_TITLE);
             $table->json(Movie::GENRES_ID)->nullable();
@@ -24,7 +24,6 @@ return new class extends Migration
             $table->string(Movie::BACKDROP_PATH)->nullable();
             $table->float(Movie::VOTE_AVERAGE)->nullable();
             $table->float(Movie::POPULARITY)->nullable();
-           
             $table->unique(Movie::UNIQUE_KEYS, Movie::TABLE . '_unique');
             $table->timestamps();
         });
