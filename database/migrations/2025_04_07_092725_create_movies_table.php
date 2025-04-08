@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use app\ETL\Entities\Movie\Movie;
+use App\ETL\Entities\Movie;
 
 return new class extends Migration
 {

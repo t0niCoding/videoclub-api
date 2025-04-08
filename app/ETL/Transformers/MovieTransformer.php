@@ -2,12 +2,13 @@
 
 namespace App\ETL\Transformers;
 
-use App\ETL\Entities\Movie\Movie;
+use App\ETL\Entities\Movie;
 
 class MovieTransformer
 {
     public function transform(array $data): array
     {
+
         return [
             Movie::ORIGINAL_ID => $data['id'],
             Movie::TITLE => $data['title'],

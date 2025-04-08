@@ -8,6 +8,13 @@ use Illuminate\Console\Command;
 class ImportMovies extends Command
 {
     /**
+     * The MovieLoader instance.
+     *
+     * @var MovieLoader
+     */
+    private $MovieLoader;
+
+    /**
      * The name and signature of the console command.
      *
      * @var string

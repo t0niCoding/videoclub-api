@@ -1,6 +1,6 @@
 <?php
 
-namespace App\ETL\Entities\Movie;
+namespace App\ETL\Entities;
 
 use Illuminate\Database\Eloquent\Model;
 

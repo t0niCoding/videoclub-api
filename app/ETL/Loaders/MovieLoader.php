@@ -5,7 +5,7 @@ namespace App\ETL\Loaders;
 use App\ETL\Repositories\CommonRepository;
 use App\ETL\Extractors\MovieExtractor;
 use App\ETL\Transformers\MovieTransformer;
-use App\ETL\Entities\Movie\Movie;
+use App\ETL\Entities\Movie;
 
 class MovieLoader
 {
