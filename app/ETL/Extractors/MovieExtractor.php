@@ -9,10 +9,11 @@ class MovieExtractor
     private string $endpoint = 'discover/movie';
 
 
-    public function all(array $filters = []): \Generator
+    public function getMovies(array $filters = []): array
     {
-        $page = 1;
+        $movies = [];
 
+        $page = 1;
         $response = $this->byPage($page, $filters);
         $totalPages = $response['total_pages'] ?? 1;
 
@@ -20,9 +21,11 @@ class MovieExtractor
             $response = $this->byPage($page, $filters);
 
             foreach ($response['results'] ?? [] as $movie) {
-                yield $movie;
+                $movies[] = $movie;
             }
         }
+
+        return $movies;
     }
 
     public function byPage(int $page = 1, array $filters = []): array
@@ -36,6 +39,6 @@ class MovieExtractor
 
         $params = array_merge($params, $filters);
 
-        return TmdbConnection::get($this->endpoint, $params);
+        return TmdbConnection::getApi($this->endpoint, $params);
     }
 }
