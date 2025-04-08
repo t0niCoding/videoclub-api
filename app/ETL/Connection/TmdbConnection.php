@@ -35,7 +35,7 @@ class TmdbConnection
                     'Authorization' => 'Bearer ' . config('services.tmdb.api_key'),
                     'Accept' => 'application/json',
                 ],
-                // 'verify' => true, // Habilitar en producción
+                 'verify' => false, // Habilitar mas tarde
             ]);
         }
         
@@ -56,45 +56,4 @@ class TmdbConnection
             'uri' => $e->getRequest()->getUri(),
         ]);
     }
-
-    /*
-    public static function getApi(string $endpoint, array $params = []): array
-    {
-        $baseUrl = config('services.tmdb.base_url');
-        $apiKey = config('services.tmdb.api_key');
-    
-        //$params['api_key'] = $params['api_key'] ?? $apiKey; 
-        //$params['language'] = $params['language'] ?? 'en-US';
-        //$params['page'] = $params['page'] ?? 1;
-
-        $client = new Client([
-            'base_uri' => $baseUrl,
-            'timeout'  => 10.0,
-            'verify' => false,  // Desactivar verificación SSL (activar mas adelante)
-        ]);
-
-       // $endpoint = ltrim($endpoint, '/');
-        
-        $fullUrl = $baseUrl . '/' . $endpoint;
-
-        try {
-          
-            $response = $client->request('GET', $fullUrl, [
-                'headers' => [
-                    'Authorization' => 'Bearer ' . $apiKey,
-                    'Accept' => 'application/json',
-                ],
-                'query' => $params,
-            ]);
-            
-            return json_decode($response->getBody(), true);
-        } catch (RequestException $e) {
-
-            Log::error('TMDB API Error', [
-                'error_message' => $e->getMessage(),
-                'error_details' => $e->hasResponse() ? $e->getResponse()->getBody()->getContents() : 'No response body available'
-            ]);
-            throw new \Exception('TMDB API request failed: ' . $e->getMessage());
-        }
-    }*/
 }
