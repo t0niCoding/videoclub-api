@@ -22,7 +22,6 @@ class MovieLoader
         $this->extractor = $extractor;
         $this->transformer = $transformer;
         $this->commonRepository = $repository;
-
     }
 
     public function execute(): void
