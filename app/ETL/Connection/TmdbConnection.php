@@ -14,7 +14,10 @@ class TmdbConnection
     public static function getApi(string $endpoint, array $params = []): array
     {
         try {
-            $response = self::getClient()->get(self::normalizeEndpoint($endpoint), [
+            $client = self::getClient();
+            $url = self::buildUrl($endpoint);
+            
+            $response = $client->get($url, [
                 'query' => array_filter($params),
             ]);
             
@@ -29,22 +32,24 @@ class TmdbConnection
     {
         if (self::$client === null) {
             self::$client = new Client([
-                'base_uri' => config('services.tmdb.base_url'),
                 'timeout' => 10.0,
                 'headers' => [
                     'Authorization' => 'Bearer ' . config('services.tmdb.api_key'),
                     'Accept' => 'application/json',
                 ],
-                 'verify' => false, // Habilitar mas tarde
+                'verify' => false,
             ]);
         }
         
         return self::$client;
     }
 
-    private static function normalizeEndpoint(string $endpoint): string
+    private static function buildUrl(string $endpoint): string
     {
-        return ltrim($endpoint, '/');
+        $baseUrl = rtrim(config('services.tmdb.base_url'), '/');
+        $endpoint = ltrim($endpoint, '/');
+        
+        return "{$baseUrl}/{$endpoint}";
     }
 
     private static function logError(RequestException $e): void
