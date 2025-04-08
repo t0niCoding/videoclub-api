@@ -15,7 +15,7 @@ class MovieExtractor
 
         $page = 1;
         $response = $this->byPage($page, $filters);
-        $totalPages = $response['total_pages'] ?? 1;
+        $totalPages = min($response['total_pages'] ?? 1, 500);
 
         for ($page = 1; $page <= $totalPages; $page++) {
             $response = $this->byPage($page, $filters);
@@ -24,7 +24,7 @@ class MovieExtractor
                 $movies[] = $movie;
             }
         }
-
+     
         return $movies;
     }
 
