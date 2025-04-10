@@ -9,8 +9,8 @@ class MovieTransformer
 {
     public function transform(array $data): array
     {
-    
         $releaseDate = $this->validateDate($data['release_date'] ?? null);
+        
         return [
             Movie::ORIGINAL_ID => $data['id'],
             Movie::TITLE => $data['title'],

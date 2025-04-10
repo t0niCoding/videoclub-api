@@ -32,11 +32,11 @@ class ImportMovies extends Command
      * Execute the console command.
      */
 
-     public function __construct(MovieLoader $loader)
-     {
+    public function __construct(MovieLoader $loader)
+    {
         parent::__construct();
         $this->MovieLoader = $loader;
-     }
+    }
     public function handle()
     {
         $this->info('Importing movies from TMDB...');

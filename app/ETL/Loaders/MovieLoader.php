@@ -6,7 +6,6 @@ use App\ETL\Repositories\CommonRepository;
 use App\ETL\Extractors\MovieExtractor;
 use App\ETL\Transformers\MovieTransformer;
 use App\ETL\Entities\Movie;
-use Illuminate\Support\Facades\Log;
 
 class MovieLoader
 {
@@ -18,7 +17,8 @@ class MovieLoader
         MovieExtractor $extractor,
         MovieTransformer $transformer,
         CommonRepository $repository
-    ) {
+    ) 
+    {
         $this->extractor = $extractor;
         $this->transformer = $transformer;
         $this->commonRepository = $repository;
