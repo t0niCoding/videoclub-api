@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string(Movie::ORIGINAL_ID)->unique();
             $table->string(Movie::TITLE);
             $table->string(Movie::ORIGINAL_TITLE);
-            $table->json(Movie::GENRES_ID)->nullable();
+            $table->json(Movie::GENRE_IDS)->nullable();
             $table->text(Movie::OVERVIEW)->nullable();
             $table->date(Movie::RELEASE_DATE)->nullable();
             $table->string(Movie::POSTER_PATH)->nullable();

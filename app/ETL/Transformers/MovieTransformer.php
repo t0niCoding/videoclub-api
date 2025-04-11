@@ -15,7 +15,7 @@ class MovieTransformer
             Movie::ORIGINAL_ID => $data['id'],
             Movie::TITLE => $data['title'],
             Movie::ORIGINAL_TITLE => $data['original_title'],
-            Movie::GENRES_ID => isset($data['genre_ids']) ? json_encode($data['genre_ids']) : null,
+            Movie::GENRE_IDS => isset($data['genre_ids']) ? json_encode($data['genre_ids']) : null,
             Movie::OVERVIEW => $data['overview'] ?? null,
             Movie::RELEASE_DATE => $releaseDate ?? null,
             Movie::POSTER_PATH => $data['poster_path'] ?? null,

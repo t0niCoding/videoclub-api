@@ -15,23 +15,23 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create(GenreToMovie::TABLE, function (Blueprint $table) {
-            $table->id();
-            
-            $table->string(GenreToMovie::GENRE_ID);
+            $table->id(); 
             $table->string(GenreToMovie::MOVIE_ID);
-            
-            $table->foreign(GenreToMovie::GENRE_ID)
-                  ->references(Genre::ORIGINAL_ID)
-                  ->on(Genre::TABLE)
-                  ->onDelete('CASCADE');
-                  
-            $table->foreign(GenreToMovie::MOVIE_ID)
-                  ->references(Movie::ORIGINAL_ID)
-                  ->on(Movie::TABLE)
-                  ->onDelete('CASCADE');
-                  
+            $table->string(GenreToMovie::GENRE_ID);
             $table->timestamps();
-            $table->unique([GenreToMovie::GENRE_ID, GenreToMovie::MOVIE_ID]);
+
+            // Claves foráneas
+            $table->foreign(GenreToMovie::MOVIE_ID)
+                ->references(Movie::ORIGINAL_ID)
+                ->on(Movie::TABLE)
+                ->onDelete('cascade');
+
+            $table->foreign(GenreToMovie::GENRE_ID)
+                ->references(Genre::ORIGINAL_ID)
+                ->on(Genre::TABLE)
+                ->onDelete('cascade');
+
+            $table->unique([GenreToMovie::MOVIE_ID, GenreToMovie::GENRE_ID]);
         });
     }
 

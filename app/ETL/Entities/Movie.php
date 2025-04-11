@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Movie extends Model
 {
     protected $guarded = ['id'];
-    
+
     protected $table = self::TABLE;
 
     const TABLE = 'movies';
@@ -15,7 +15,7 @@ class Movie extends Model
     const ORIGINAL_ID = 'original_id';
     const TITLE = 'title';
     const ORIGINAL_TITLE = 'original_title';
-    const GENRES_ID = 'genres_id';
+    const GENRE_IDS = 'genre_ids';
     const OVERVIEW = 'overview';
     const RELEASE_DATE = 'release_date';
     const POSTER_PATH = 'poster_path';
@@ -25,13 +25,13 @@ class Movie extends Model
 
 
     const UNIQUE_KEYS = [
-        self::ORIGINAL_ID, 
+        self::ORIGINAL_ID,
     ];
 
     const UPDATE_COLUMNS = [
         self::TITLE,
         self::ORIGINAL_TITLE,
-        self::GENRES_ID,
+        self::GENRE_IDS,
         self::OVERVIEW,
         self::RELEASE_DATE,
         self::POSTER_PATH,
@@ -40,9 +40,13 @@ class Movie extends Model
         self::POPULARITY,
     ];
 
-
     public function genres()
     {
-        return $this->belongsToMany(Genre::class, GenreToMovie::TABLE, GenreToMovie::MOVIE_ID, GenreToMovie::GENRE_ID);
+        return $this->belongsToMany(
+            Genre::class,
+            GenreToMovie::TABLE,
+            GenreToMovie::MOVIE_ID,
+            GenreToMovie::GENRE_ID
+        );
     }
 }

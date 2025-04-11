@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Genre extends Model
 {
     protected $guarded = ['id'];
-    
+
     protected $table = self::TABLE;
 
     const TABLE = 'genres';
@@ -29,7 +29,9 @@ class Genre extends Model
             Movie::class,
             GenreToMovie::TABLE,
             GenreToMovie::GENRE_ID,
-            GenreToMovie::MOVIE_ID
+            GenreToMovie::MOVIE_ID,
+            Genre::ORIGINAL_ID,
+            Movie::ORIGINAL_ID
         );
     }
 }
