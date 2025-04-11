@@ -1,0 +1,45 @@
+<?php
+
+use App\ETL\Entities\GenreToMovie;
+use App\ETL\Entities\Movie;
+use App\ETL\Entities\Genre;
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::create(GenreToMovie::TABLE, function (Blueprint $table) {
+            $table->id();
+            
+            $table->string(GenreToMovie::GENRE_ID);
+            $table->string(GenreToMovie::MOVIE_ID);
+            
+            $table->foreign(GenreToMovie::GENRE_ID)
+                  ->references(Genre::ORIGINAL_ID)
+                  ->on(Genre::TABLE)
+                  ->onDelete('CASCADE');
+                  
+            $table->foreign(GenreToMovie::MOVIE_ID)
+                  ->references(Movie::ORIGINAL_ID)
+                  ->on(Movie::TABLE)
+                  ->onDelete('CASCADE');
+                  
+            $table->timestamps();
+            $table->unique([GenreToMovie::GENRE_ID, GenreToMovie::MOVIE_ID]);
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists(GenreToMovie::TABLE);
+    }
+};

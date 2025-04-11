@@ -3,7 +3,6 @@
 namespace App\ETL\Entities;
 
 use Illuminate\Database\Eloquent\Model;
-use const Dom\NAMESPACE_ERR;
 
 class Genre extends Model
 {
@@ -23,4 +22,14 @@ class Genre extends Model
     const UPDATE_COLUMNS = [
         self::NAME,
     ];
+
+    public function movies()
+    {
+        return $this->belongsToMany(
+            Movie::class,
+            GenreToMovie::TABLE,
+            GenreToMovie::GENRE_ID,
+            GenreToMovie::MOVIE_ID
+        );
+    }
 }

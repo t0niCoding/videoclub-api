@@ -40,4 +40,9 @@ class Movie extends Model
         self::POPULARITY,
     ];
 
+
+    public function genres()
+    {
+        return $this->belongsToMany(Genre::class, GenreToMovie::TABLE, GenreToMovie::MOVIE_ID, GenreToMovie::GENRE_ID);
+    }
 }
