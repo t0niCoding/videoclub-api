@@ -17,10 +17,7 @@ class GetMoviesQuery
                 'movies.poster_path',
                 'movies.release_date',
                 'genres.id as genre_id',
-                'genres.name as genre_name',
-                'movies.overview',
-                'movies.vote_average',
-                'movies.popularity'
+                'genres.name as genre_name'
             )
             ->leftJoin('genre_to_movie', 'movies.original_id', '=', 'genre_to_movie.movie_id')
             ->leftJoin('genres', 'genre_to_movie.genre_id', '=', 'genres.original_id')
@@ -61,9 +58,6 @@ class GetMoviesQuery
                     'title' => $movie->title,
                     'poster_path' => $movie->poster_path,
                     'release_date' => $movie->release_date,
-                    'overview' => $movie->overview,
-                    'vote_average' => $movie->vote_average,
-                    'popularity' => $movie->popularity,
                     'genres' => $genres
                 ];
             })
