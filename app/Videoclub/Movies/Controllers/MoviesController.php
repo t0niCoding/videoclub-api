@@ -19,11 +19,22 @@ class MoviesController extends Controller
         $genreId = $request->get('genre_id');
         $releaseYear = $request->get('release_date');
         $movieId = $request->get('movie_id');
-     
-        $movies = $this->getMoviesQuery->query($genreId, $releaseYear, $movieId);
+        $perPage = $request->get('per_page', 10);
+
+        $movies = $this->getMoviesQuery->query($genreId, $releaseYear, $movieId, $perPage);
 
         return [
-            'data' => $movies
-        ];
+            'data' => $movies->items(),
+            'meta' => [
+                'current_page' => $movies->currentPage(),
+                'last_page' => $movies->lastPage(),
+                'per_page' => $movies->perPage(),
+                'total' => $movies->total(),
+            ],
+            'links' => [
+                'prev' => $movies->previousPageUrl(),
+                'next' => $movies->nextPageUrl(),
+            ],
+        ];;
     }
 }

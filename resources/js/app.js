@@ -1,5 +1,9 @@
 import { createApp } from 'vue';
+import App from './App.vue';
+import router from './router';
+// test 
 import HelloWorld from './components/HelloWorld.vue'
+
 import './bootstrap';
 
-createApp(HelloWorld).mount('#app')
+createApp(App).use(router).mount('#app')

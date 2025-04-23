@@ -3,11 +3,12 @@
 namespace App\Videoclub\Movies\Queries;
 
 use Illuminate\Support\Collection;
+use Illuminate\Pagination\LengthAwarePaginator;
 use App\ETL\Entities\Movie;
 
 class GetMoviesQuery
 {
-    public function query(?int $genre = null, $year = null, ?int $id = null): Collection
+    public function query(?int $genre = null, $year = null, ?int $id = null, int $perPage = 10): LengthAwarePaginator
     {
         $query = Movie::query()
             ->select(
@@ -23,24 +24,21 @@ class GetMoviesQuery
             ->leftJoin('genres', 'genre_to_movie.genre_id', '=', 'genres.original_id')
             ->distinct();
 
-
         if ($genre) {
             $query->where('genres.id', $genre);
         }
-
 
         if ($year) {
             $query->whereYear('movies.release_date', $year);
         }
 
-
         if ($id) {
             $query->where('movies.id', $id);
         }
 
-        $movies = $query->get();
+        $pagination = $query->paginate($perPage);
 
-        return $movies
+        $transformed = collect($pagination->items())
             ->groupBy('id')
             ->map(function ($group) {
                 $movie = $group->first();
@@ -62,5 +60,13 @@ class GetMoviesQuery
                 ];
             })
             ->values();
+
+        return new LengthAwarePaginator(
+            $transformed,
+            $pagination->total(),
+            $perPage,
+            $pagination->currentPage(),
+            ['path' => request()->url(), 'query' => request()->query()]
+        );
     }
 }
