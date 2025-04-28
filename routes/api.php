@@ -6,7 +6,7 @@ use App\Videoclub\Movies\Controllers\MoviesController;
 use App\Videoclub\Movies\Controllers\MovieDetailcontroller;
 use App\Videoclub\Movies\Controllers\GenresController;
 use App\Http\Controllers\Auth\AuthController;
-use app\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 
 

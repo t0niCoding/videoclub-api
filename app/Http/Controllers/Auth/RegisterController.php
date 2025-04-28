@@ -28,13 +28,28 @@ class RegisterController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-        $token = $user->createToken('Personal Access Token')->plainTextToken;
+        if ($user) {
+            try {
+                $token = $user->createToken('Personal Access Token')->plainTextToken;
 
-        return response()->json([
-            'message' => 'Registration successful',
-            'access_token' => $token,
-            'token_type' => 'Bearer',
-            'user' => $user
-        ], 201);
+                return response()->json([
+                    'message' => 'Registration successful',
+                    'access_token' => $token,
+                    'token_type' => 'Bearer',
+                    'user' => $user
+                ], 201);
+
+            } catch (\Exception $e) {
+
+                return response()->json([
+                    'message' => 'Error generating token',
+                    'error' => $e->getMessage(),
+                ], 500);
+            }
+        } else {
+            return response()->json([
+                'message' => 'Error creating user'
+            ], 500);
+        }
     }
 }
